@@ -12,19 +12,17 @@ import java.util.Objects;
 import java.util.TimeZone;
 import java.util.stream.IntStream;
 
-import com.fasterxml.jackson.core.JsonFactory;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
 
 import elemental.json.JsonArray;
-import elemental.json.JsonValue;
-import elemental.json.impl.JreJsonArray;
 import elemental.json.impl.JreJsonFactory;
 
 @Tag("timeline-element")
-@JsModule("src/timeline-element.ts")
+@NpmPackage(value = "tltv-timeline-element", version = "1.0.0")
+@JsModule("tltv-timeline-element/src/timeline-element.ts")
 @NpmPackage(value = "date-fns", version = "^2.9.0")
 @NpmPackage(value = "date-fns-tz", version = "^1.0.9")
 public class Timeline extends Component {
