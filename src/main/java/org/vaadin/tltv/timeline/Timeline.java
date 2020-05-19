@@ -21,7 +21,7 @@ import elemental.json.JsonArray;
 import elemental.json.impl.JreJsonFactory;
 
 @Tag("timeline-element")
-@NpmPackage(value = "tltv-timeline-element", version = "1.0.0")
+@NpmPackage(value = "tltv-timeline-element", version = "^1.0.1")
 @JsModule("tltv-timeline-element/src/timeline-element.ts")
 @NpmPackage(value = "date-fns", version = "^2.9.0")
 @NpmPackage(value = "date-fns-tz", version = "^1.0.9")
