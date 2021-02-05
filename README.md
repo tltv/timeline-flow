@@ -1,16 +1,12 @@
 # Timeline
 
-Vaadin 15 Flow component
+Vaadin 18 Flow component
 
 Migrated from GWT Timeline widget for Gantt component (Java/Vaadin 8).
 
 ## Development instructions
 
 Flow component integrates `<timeline-element>` LitElement web component.
-
-TypeScript source file is located in `/src/main/resources/META-INF/resources/frontend/src/timeline-element.ts`
-
-Flow integration is located in `/src/main/java/org/vaadin/tltv/timeline/Timeline.java`
 
 
 Starting the test/demo server:
