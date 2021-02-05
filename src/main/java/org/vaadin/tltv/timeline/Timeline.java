@@ -21,7 +21,7 @@ import elemental.json.JsonArray;
 import elemental.json.impl.JreJsonFactory;
 
 @Tag("timeline-element")
-@NpmPackage(value = "tltv-timeline-element", version = "^1.0.1")
+@NpmPackage(value = "tltv-timeline-element", version = "^1.0.5")
 @JsModule("tltv-timeline-element/src/timeline-element.ts")
 @NpmPackage(value = "date-fns", version = "^2.9.0")
 @NpmPackage(value = "date-fns-tz", version = "^1.0.9")
@@ -35,7 +35,7 @@ public class Timeline extends Component {
 	
 	private final JreJsonFactory jsonFactory = new JreJsonFactory();
 	
-	private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+	private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH");
 	
 	
 	public void setResolution(Resolution resolution) {
@@ -85,11 +85,11 @@ public class Timeline extends Component {
 	
 	public void setEndDate(LocalDate endDate) {
 		getElement().setAttribute("enddatetime", dateTimeFormatter
-				.format(resetTimeToMax(endDate.atStartOfDay(), false)));	
+				.format(resetTimeToMin(endDate.atStartOfDay())));	
 	}
 	
 	public void setEndDateTime(LocalDateTime endDateTime) {
-		getElement().setAttribute("enddatetime", dateTimeFormatter.format(resetTimeToMax(endDateTime, Resolution.Hour.equals(getResolution()))));
+		getElement().setAttribute("enddatetime", dateTimeFormatter.format(resetTimeToMin(endDateTime)));
 	}
 	
 	public LocalDateTime getEndDateTime() {
