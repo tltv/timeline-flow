@@ -29,6 +29,9 @@ import com.vaadin.flow.router.Route;
 @Route("")
 public class View extends Div {
 
+	private TimePicker startTimeField;
+	private TimePicker endTimeField;
+	
     public View() {
     	setWidthFull();
     	
@@ -60,13 +63,17 @@ public class View extends Div {
     	Select<Resolution> resolutionField = new Select<Resolution>(Resolution.values());
     	resolutionField.setLabel("Resolution");
 		resolutionField.setValue(timeline.getResolution());
-    	resolutionField.addValueChangeListener(event -> timeline.setResolution(event.getValue()));
+		resolutionField.addValueChangeListener(event -> {
+			timeline.setResolution(event.getValue());
+			setupToolsByResolution(event.getValue());
+		});
     	
     	DatePicker startDate = new DatePicker(timeline.getStartDateTime().toLocalDate());
     	startDate.setLabel("Start Date");
     	startDate.addValueChangeListener(event -> timeline.setStartDate(event.getValue()));
     	
-    	TimePicker startTimeField = new TimePicker("Start Time", timeline.getStartDateTime().toLocalTime());
+    	startTimeField = new TimePicker("Start Time", timeline.getStartDateTime().toLocalTime());
+    	startTimeField.setWidth("8em");
     	startTimeField.addValueChangeListener(
 				event -> timeline.setStartDateTime(startDate.getValue().atTime(event.getValue())));
 		
@@ -75,15 +82,30 @@ public class View extends Div {
 		endDate.addValueChangeListener(
 				event -> timeline.setEndDate(event.getValue()));
 		
-		TimePicker endTimeField = new TimePicker("End Time (inclusive)", timeline.getEndDateTime().toLocalTime());
+		endTimeField = new TimePicker("End Time (inclusive)", timeline.getEndDateTime().toLocalTime());
+		endTimeField.setWidth("8em");
 		endTimeField.addValueChangeListener(
 				event -> timeline.setEndDateTime(endDate.getValue().atTime(event.getValue())));
+		
+		
 		
 		tools.add(resolutionField, startDate, startTimeField, endDate, endTimeField);
 		tools.add(createTimeZoneField(timeline));
 		tools.add(createLocaleField(timeline));
+		
+		setupToolsByResolution(timeline.getResolution());
 		return tools;
     }
+
+	private void setupToolsByResolution(Resolution value) {
+		if(Resolution.Hour.equals(value)) {
+			startTimeField.setVisible(true);
+			endTimeField.setVisible(true);
+		} else {
+			startTimeField.setVisible(false);
+			endTimeField.setVisible(false);
+		}
+	}
 
 	private ComboBox<String> createTimeZoneField(Timeline timeline) {
 		ComboBox<String> timeZoneField = new ComboBox<>("Timezone", getSupportedTimeZoneIds());
