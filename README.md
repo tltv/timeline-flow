@@ -1,6 +1,6 @@
 # Timeline
 
-Vaadin 18 Flow component
+Vaadin 21 Flow component
 
 Migrated from GWT Timeline widget for Gantt component (Java/Vaadin 8).
 
